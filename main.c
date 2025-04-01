@@ -3,8 +3,8 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
+#include <locale.h>
 
-// FunÁıes para limpar o buffer de entrada e pausar a tela
 void limparBuffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
@@ -15,7 +15,7 @@ void pausarTela() {
     limparBuffer();
 }
 
-// FunÁ„o para exibir o menu principal
+
 int menuPrincipal() {
     int opcao;
     system("cls || clear");
@@ -33,9 +33,10 @@ int menuPrincipal() {
     return opcao;
 }
 
-// ImplementaÁ„o do jogo Pergunta e Resposta
+
 void perguntaResposta() {
     char jogarNovamente;
+    setlocale(LC_ALL, "Portuguese");
     
     do {
         system("cls || clear");
@@ -45,21 +46,21 @@ void perguntaResposta() {
         printf("Responda corretamente as perguntas abaixo.\n");
         pausarTela();
         
-        // Perguntas e respostas
+        
         char *perguntas[5] = {
             "Qual foi o placar do jogo Brasil e Alemanha na Copa de 2014?",
             "Qual foi o papa anterior ao atual?",
-            "Como È obrigado em francÍs?",
-            "Quem È o autor da sÈrie paraÌso?",
-            "No contexto da Teoria das Cordas, qual destes elementos È fundamental para resolver a incompatibilidade entre a mec‚nica qu‚ntica e a relatividade geral?"
+            "Como √© obrigado em franc√™s?",
+            "Em um ecossistema aqu√°tico com eutrofiza√ß√£o, qual processo do ciclo do nitrog√™nio √© mais diretamente afetado pelo excesso de nutrientes, levando √† prolifera√ß√£o de algas e posterior zona morta?",
+            "No contexto da Teoria das Cordas, qual destes elementos √© fundamental para resolver a incompatibilidade entre a mec√¢nica qu√¢ntica e a relatividade geral?"
         };
         
         char *opcoes[5][4] = {
             {"A) 1 a 0", "B) 7 a 1", "C) 4 a 3", "D) 21 a 1"},
-            {"A) Francisco", "B) Bento XVI", "C) Jo„o Paulo II", "D) Paulo VI"},
+            {"A) Francisco", "B) Bento XVI", "C) Jo√£o Paulo II", "D) Paulo VI"},
             {"A) Aurevoir", "B) Bonjour", "C) Merci", "D) Pardon"},
-            {"A) Vinci Gilligan", "B) Jordan Peele", "C) Rezendeevil", "D)Edukof "},
-            {"A) BÛson de Higgs", "B) Dimensıes extras", "C) Buracos negros primordiais", "D) MatÈria escura fria"}
+            {"A)Fixa√ß√£o biol√≥gica (por cianobact√©rias)", "B)Nitrifica√ß√£o (oxida√ß√£o de NH4+ para NO3-)", "C)Assimila√ß√£o (absor√ß√£o de NO3- por plantas e algas)", "D)Desnitrifica√ß√£o (redu√ß√£o de NO3- para N2) "},
+            {"A) B√≥son de Higgs", "B) Dimens√µes extras", "C) Buracos negros primordiais", "D) Mat√©ria escura fria"}
         };
         
         char respostas[5] = {'B', 'B', 'C', 'C', 'B'};
@@ -101,28 +102,29 @@ void perguntaResposta() {
     } while (jogarNovamente == 'S');
 }
 
-// ImplementaÁ„o do jogo Cobra na Caixa
+
 void cobraNaCaixa() {
     char jogarNovamente;
+    setlocale(LC_ALL, "Portuguese");
     
     do {
         system("cls || clear");
         printf("=================================\n");
         printf("         COBRA NA CAIXA!        \n");
         printf("=================================\n");
-        printf("Voce esta em uma tumba egipcia com 5 caixas.\n");
-        printf("Uma caixa tem o botao para abrir a porta.\n");
+        printf("Voc√™ est√° em uma tumba eg√≠pcia com 5 caixas.\n");
+        printf("Uma caixa tem o bot√£o para abrir a porta.\n");
         printf("Outra tem uma cobra mortal. As outras estao vazias.\n");
         pausarTela();
         
-        // Nomes dos jogadores
+        
         char *nomes[7] = {
-            "Marcos", "Adenilson", "Walter", 
-            "Joana", "Indiana Jones", 
-            "Carmem", "Big Smoke"
+            "Marcelo", "Jaderson", "Alcino", 
+            "Ytalo", "Pedro", 
+            "Antonio", "Evaristo"
         };
         
-        // Escolha dos jogadores
+       
         char jogador1[50], jogador2[50];
         int escolha1, escolha2;
         int i;
@@ -148,7 +150,7 @@ void cobraNaCaixa() {
         limparBuffer();
         strcpy(jogador2, nomes[escolha2-1]);
         
-        // Sorteio de quem comeÁa
+       
         srand(time(NULL));
         int vez = rand() % 2;
         char *jogadorAtual = vez == 0 ? jogador1 : jogador2;
@@ -161,7 +163,7 @@ void cobraNaCaixa() {
         int botao, cobra;
         
         do {
-            // Posicionar botao e cobra em caixas diferentes
+            
             do {
                 botao = rand() % 5 + 1;
                 cobra = rand() % 5 + 1;
@@ -184,7 +186,7 @@ void cobraNaCaixa() {
                 jogoAtivo = 0;
             } else {
                 printf("Esta caixa esta vazia.\n");
-                // Alternar jogador
+               
                 jogadorAtual = (strcmp(jogadorAtual, jogador1) == 0) ? jogador2 : jogador1;
                 printf("Agora e a vez de %s.\n", jogadorAtual);
                 pausarTela();
@@ -199,7 +201,7 @@ void cobraNaCaixa() {
     } while (jogarNovamente == 'S');
 }
 
-// ImplementaÁ„o CORRIGIDA do jogo Gousmas War
+
 void gousmasWar() {
     char jogarNovamente;
     
@@ -220,13 +222,14 @@ void gousmasWar() {
         
         typedef struct {
             int furia;
-            int ativa; // 1 = ativa, 0 = destruÌda
+            int ativa; 
         } Gousma;
         
-        Gousma jogador1[2] = {{1, 1}, {1, 1}};
+       
+	    Gousma jogador1[2] = {{1, 1}, {1, 1}};
         Gousma jogador2[2] = {{1, 1}, {1, 1}};
         int qtdJogador1 = 2, qtdJogador2 = 2;
-        int vez = 0; // 0 = jogador 1, 1 = jogador 2
+        int vez = 0; 
         
         int jogoAtivo = 1;
         int i;
@@ -237,7 +240,7 @@ void gousmasWar() {
             printf("          GOUSMAS WAR            \n");
             printf("=================================\n");
             
-            // Mostra Gousmas do Jogador 1 (apenas as ativas)
+           
             printf("Jogador 1 Gousmas: ");
             int gousmasAtivas1 = 0;
             for (i = 0; i < 2; i++) {
@@ -248,7 +251,7 @@ void gousmasWar() {
             }
             printf("\n");
             
-            // Mostra Gousmas do Jogador 2 (apenas as ativas)
+            
             printf("Jogador 2 Gousmas: ");
             int gousmasAtivas2 = 0;
             for (i = 0; i < 2; i++) {
@@ -267,15 +270,15 @@ void gousmasWar() {
             scanf("%d", &acao);
             limparBuffer();
             
-            if (acao == 1) { // Ataque
-                if (vez == 0) { // Jogador 1 ataca
+            if (acao == 1) { 
+                if (vez == 0) { 
                     if (gousmasAtivas1 == 0) {
                         printf("Voce nao tem Gousmas para atacar!\n");
                         pausarTela();
                         continue;
                     }
                     
-                    // Lista Gousmas ativas do jogador 1
+                    
                     printf("Suas Gousmas ativas:\n");
                     int indicesAtivas1[2], count1 = 0;
                     for (i = 0; i < 2; i++) {
@@ -294,7 +297,7 @@ void gousmasWar() {
                     int idxAtacante = indicesAtivas1[escolhaAtacante];
                     int furiaAtacante = jogador1[idxAtacante].furia;
                     
-                    // Lista Gousmas ativas do jogador 2
+                   
                     printf("Gousmas inimigas ativas:\n");
                     int indicesAtivas2[2], count2 = 0;
                     for (i = 0; i < 2; i++) {
@@ -312,24 +315,24 @@ void gousmasWar() {
                     escolhaAlvo--;
                     int idxAlvo = indicesAtivas2[escolhaAlvo];
                     
-                    // Transfere a furia (mas mantÈm a do atacante)
+                    
                     jogador2[idxAlvo].furia += furiaAtacante;
                     
-                    // Verifica se explodiu (furia > 5)
+                    
                     if (jogador2[idxAlvo].furia > 5) {
                         printf("\nA Gousma inimiga explodiu com %d de furia!\n", jogador2[idxAlvo].furia);
-                        jogador2[idxAlvo].ativa = 0; // Destroi a Gousma
+                        jogador2[idxAlvo].ativa = 0; 
                         qtdJogador2--;
                     }
                 } 
-                else { // Jogador 2 ataca (lÛgica similar)
+                else { 
                     if (gousmasAtivas2 == 0) {
                         printf("Voce nao tem Gousmas para atacar!\n");
                         pausarTela();
                         continue;
                     }
                     
-                    // Lista Gousmas ativas do jogador 2
+                    
                     printf("Suas Gousmas ativas:\n");
                     int indicesAtivas2[2], count2 = 0;
                     for (i = 0; i < 2; i++) {
@@ -348,7 +351,7 @@ void gousmasWar() {
                     int idxAtacante = indicesAtivas2[escolhaAtacante];
                     int furiaAtacante = jogador2[idxAtacante].furia;
                     
-                    // Lista Gousmas ativas do jogador 1
+                    
                     printf("Gousmas inimigas ativas:\n");
                     int indicesAtivas1[2], count1 = 0;
                     for (i = 0; i < 2; i++) {
@@ -366,26 +369,26 @@ void gousmasWar() {
                     escolhaAlvo--;
                     int idxAlvo = indicesAtivas1[escolhaAlvo];
                     
-                    // Transfere a furia (mas mantÈm a do atacante)
+                    
                     jogador1[idxAlvo].furia += furiaAtacante;
                     
-                    // Verifica se explodiu (furia > 5)
+                    
                     if (jogador1[idxAlvo].furia > 5) {
                         printf("\nA Gousma inimiga explodiu com %d de furia!\n", jogador1[idxAlvo].furia);
-                        jogador1[idxAlvo].ativa = 0; // Destroi a Gousma
+                        jogador1[idxAlvo].ativa = 0; 
                         qtdJogador1--;
                     }
                 }
             } 
-            else if (acao == 2) { // Dividir
-                if (vez == 0) { // Jogador 1 divide
+            else if (acao == 2) { 
+                if (vez == 0) { 
                     if (gousmasAtivas1 >= 2) {
                         printf("Voce ja tem o maximo de Gousmas!\n");
                         pausarTela();
                         continue;
                     }
                     
-                    // Encontra Ìndice da Gousma ativa para dividir
+                    
                     int idxDividir = -1;
                     for (i = 0; i < 2; i++) {
                         if (jogador1[i].ativa) {
@@ -400,7 +403,7 @@ void gousmasWar() {
                         continue;
                     }
                     
-                    // Encontra Ìndice para a nova Gousma
+                    
                     int idxNova = -1;
                     for (i = 0; i < 2; i++) {
                         if (!jogador1[i].ativa) {
@@ -409,21 +412,20 @@ void gousmasWar() {
                         }
                     }
                     
-                    // Divide a Gousma
+                    
                     int novaFuria = jogador1[idxDividir].furia / 2;
                     jogador1[idxDividir].furia -= novaFuria;
                     jogador1[idxNova].furia = novaFuria;
                     jogador1[idxNova].ativa = 1;
                     qtdJogador1++;
                 } 
-                else { // Jogador 2 divide (lÛgica similar)
+                else { 
                     if (gousmasAtivas2 >= 2) {
                         printf("Voce ja tem o maximo de Gousmas!\n");
                         pausarTela();
                         continue;
                     }
                     
-                    // Encontra Ìndice da Gousma ativa para dividir
                     int idxDividir = -1;
                     for (i = 0; i < 2; i++) {
                         if (jogador2[i].ativa) {
@@ -438,7 +440,7 @@ void gousmasWar() {
                         continue;
                     }
                     
-                    // Encontra Ìndice para a nova Gousma
+                   
                     int idxNova = -1;
                     for (i = 0; i < 2; i++) {
                         if (!jogador2[i].ativa) {
@@ -447,7 +449,7 @@ void gousmasWar() {
                         }
                     }
                     
-                    // Divide a Gousma
+                    
                     int novaFuria = jogador2[idxDividir].furia / 2;
                     jogador2[idxDividir].furia -= novaFuria;
                     jogador2[idxNova].furia = novaFuria;
@@ -456,7 +458,7 @@ void gousmasWar() {
                 }
             }
             
-            // Verifica condiÁıes de vitÛria
+            
             if (qtdJogador1 == 0) {
                 printf("\nJogador 2 venceu!\n");
                 jogoAtivo = 0;
@@ -464,7 +466,7 @@ void gousmasWar() {
                 printf("\nJogador 1 venceu!\n");
                 jogoAtivo = 0;
             } else {
-                vez = (vez == 0) ? 1 : 0; // Alterna jogador
+                vez = (vez == 0) ? 1 : 0; 
             }
             
             pausarTela();
@@ -478,7 +480,7 @@ void gousmasWar() {
     } while (jogarNovamente == 'S');
 }
 int main() {
-    srand(time(NULL)); // Inicializar semente para n˙meros aleatÛrios
+    srand(time(NULL)); 
     
     int opcao;
     do {
